@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="robot_name" default="blueduckie"/>
+    <arg name="pkg_name" default="blueduckie_advanced_lane_following"/>
+    
+    <!-- Advanced Lane Following Node -->
+    <node 
+        name="advanced_lane_following_node" 
+        pkg="$(arg pkg_name)" 
+        type="advanced_lane_following_node.py" 
+        output="screen"
+        clear_params="true">
+        
+        <param name="robot_name" value="$(arg robot_name)"/>
+        <param name="~robot_name" value="$(arg robot_name)"/>
+        
+        <!-- Enhanced PID parameters matching advanced implementation -->
+        <param name="~kp_base" value="0.85"/>
+        <param name="~ki_base" value="0.025"/>
+        <param name="~kd_base" value="0.18"/>
+        <param name="~kp_curve" value="1.2"/>
+        <param name="~ki_max" value="0.1"/>
+        
+        <!-- Advanced speed control -->
+        <param name="~base_speed" value="0.32"/>
+        <param name="~max_speed" value="0.55"/>
+        <param name="~min_speed" value="0.12"/>
+        <param name="~curve_speed_reduction" value="0.3"/>
+        <param name="~confidence_speed_factor" value="0.8"/>
+        
+        <!-- Advanced lane geometry parameters -->
+        <param name="~expected_lane_width" value="195"/>
+        <param name="~lane_width_tolerance" value="60"/>
+        <param name="~min_lane_pixels" value="80"/>
+        <param name="~max_steering_angle" value="0.8"/>
+        
+        <!-- Safety and recovery parameters -->
+        <param name="~max_lost_frames" value="15"/>
+        <param name="~recovery_speed_factor" value="0.5"/>
+        <param name="~emergency_stop_threshold" value="25"/>
+        <param name="~confidence_threshold" value="0.3"/>
+        
+        <!-- Advanced smoothing and filtering -->
+        <param name="~kalman_process_noise" value="0.025"/>
+        <param name="~kalman_measurement_noise" value="0.08"/>
+        <param name="~curve_smoothing_window" value="7"/>
+        <param name="~steering_smoothing" value="0.75"/>
+        <param name="~velocity_smoothing" value="0.6"/>
+    </node>
+    
+    <!-- Optional: Image visualization for debugging -->
+    <node 
+        name="image_view" 
+        pkg="image_view" 
+        type="image_view" 
+        if="false">
+        <remap from="image" to="/$(arg robot_name)/camera_node/image/raw"/>
+    </node>
+    
+</launch>

@@ -1,0 +1,82 @@
+# BlueDuckie Advanced Lane Following Configuration
+# This file contains tunable parameters for optimal performance
+
+# Control Parameters
+control:
+  base_speed: 0.3        # Base forward speed (m/s)
+  max_speed: 0.5         # Maximum allowed speed
+  min_speed: 0.15        # Minimum speed for stability
+  
+  # PID Controller (Adaptive)
+  pid:
+    kp_base: 0.8         # Proportional gain base
+    ki_base: 0.02        # Integral gain base  
+    kd_base: 0.15        # Derivative gain base
+    integral_limit: 50   # Anti-windup limit
+  
+  # Steering
+  steering_gain: 0.8     # Differential steering multiplier
+  steering_smoothing: 0.7 # Steering smoothing factor (0-1)
+
+# Vision Parameters
+vision:
+  # Color Detection (HSV)
+  yellow_line:
+    hue_min: 20
+    hue_max: 30
+    saturation_min: 100
+    saturation_max: 255
+    value_min: 100
+    value_max: 255
+  
+  white_line:
+    hue_min: 0
+    hue_max: 180
+    saturation_min: 0
+    saturation_max: 25
+    value_min: 200
+    value_max: 255
+  
+  # Region of Interest
+  roi:
+    top_ratio: 0.4       # Top of ROI (0-1)
+    bottom_ratio: 0.9    # Bottom of ROI (0-1)
+  
+  # Lane Detection
+  lane:
+    expected_width: 200   # Expected lane width in pixels
+    width_tolerance: 50   # Tolerance for lane width variation
+    min_contour_area: 20  # Minimum contour area for line detection
+    min_window_pixels: 50 # Minimum pixels in sliding window
+
+# Advanced Features
+advanced:
+  # Kalman Filter
+  kalman:
+    process_noise: 0.03   # Process noise covariance
+    measurement_noise: 0.1 # Measurement noise covariance
+  
+  # Curve Detection
+  curve:
+    smoothing_window: 5   # Window size for curve smoothing
+    curvature_factor: 0.1 # Curvature impact on speed
+  
+  # Image Processing
+  image:
+    clahe_clip_limit: 2.0 # CLAHE clip limit for contrast enhancement
+    clahe_tile_size: 8    # CLAHE tile grid size
+    gaussian_kernel: 5    # Gaussian blur kernel size
+    morphology_kernel: 3  # Morphological operations kernel size
+
+# Safety Parameters
+safety:
+  confidence_threshold: 0.3  # Minimum confidence for lane detection
+  max_steering_angle: 1.0    # Maximum steering angle (radians)
+  emergency_stop_threshold: 0.1 # Emergency stop confidence threshold
+
+# Debug Options
+debug:
+  enable_logging: true      # Enable debug logging
+  log_interval: 2.0        # Logging interval (seconds)
+  save_debug_images: false # Save processed images for debugging
+  image_topic_suffix: "/image/compressed" # Camera topic suffix
