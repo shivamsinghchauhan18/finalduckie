@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(blueduckie_lane_following)
+project(blueduckie_advanced_lane_following)
 
 find_package(catkin REQUIRED COMPONENTS
   rospy
