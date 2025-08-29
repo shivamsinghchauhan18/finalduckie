@@ -2,7 +2,7 @@
 <package format="2">
   <name>Lane</name>
   <version>1.0.0</version>
-  <description>LaneFollowing</description>
+  <description>MyLaneFollowing</description>
   
   <maintainer email="you@example.com">BlueDuckie Team</maintainer>
   <license>MIT</license>
